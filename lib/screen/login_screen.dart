@@ -2,10 +2,10 @@ import 'package:ex_module_core/ex_module_core.dart';
 import 'package:ex_widget/ex_widget.dart';
 import 'package:flutter/material.dart';
 
-import 'cubit/login_cubit.dart';
-import 'cubit/login_state.dart';
-import 'widgets/button_widget.dart';
-import 'widgets/text_field_widget.dart';
+import '../cubit/login_cubit.dart';
+import '../cubit/login_state.dart';
+import '../widgets/button_widget.dart';
+import '../widgets/text_field_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -67,14 +67,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   }
                 },
                 builder: (context, state) {
-                  if (state is Loading) {
-                    isLoading = true;
-                  }
                   if (state is Error) {
-                    isLoading = false;
+                    //to-do
                   }
                   if (state is LoginSuccess) {
-                    isLoading = false;
+                    //to-do
                   }
 
                   return ButtonWidget(

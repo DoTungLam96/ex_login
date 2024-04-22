@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../di/login_di.dart';
-import '../login_screen.dart';
+import '../screen/login_screen.dart';
 
 class LoginModule extends BaseModule {
   @override
