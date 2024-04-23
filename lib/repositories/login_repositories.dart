@@ -8,6 +8,7 @@ import 'package:get_it/get_it.dart';
 import '../models/auth_model.dart';
 import '../models/user_model.dart';
 import '../services/login_services.dart';
+import 'db_repository.dart';
 
 abstract class LoginRepositories {
   Future<AuthModel?> login(String username, String password,
@@ -46,11 +47,15 @@ class LoginRepositoriesImpl implements LoginRepositories {
   Future<UserModel?> getMe() async {
     try {
       final response = await loginServices.getMe();
-      final isSaved = await sharedPreferencesManager.saveDataWithExpiration(
-        jsonEncode(response.data),
-        const Duration(minutes: 2),
+      // final isSaved = await sharedPreferencesManager.saveDataWithExpiration(
+      //   jsonEncode(response.data),
+      //   const Duration(minutes: 2),
+      // );
+
+      await GetIt.instance<DatabaseRepository>().insertUser(
+        response.data ?? UserModel(),
       );
-      print("saved_me: ${isSaved}");
+
       return response.data;
     } catch (e) {
       return null;

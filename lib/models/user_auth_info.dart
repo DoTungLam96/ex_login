@@ -1,5 +1,4 @@
-import 'package:equatable/equatable.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:ex_module_core/ex_module_core.dart';
 
 part 'user_auth_info.g.dart';
 
@@ -17,8 +16,4 @@ class AuthInfo extends Equatable {
 
   @override
   List<Object?> get props => [registrationType, twoFAType];
-
 }
-
-
-

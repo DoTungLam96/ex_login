@@ -1,4 +1,4 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:ex_module_core/ex_module_core.dart';
 
 part 'auth_model.g.dart';
 

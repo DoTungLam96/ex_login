@@ -8,17 +8,15 @@ part of 'user_model.dart';
 
 UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       userName: json['username'] as String?,
-      fullName: json['fullName'] as String,
+      id: json['id'] as int?,
+      fullName: json['fullName'] as String?,
       email: json['email'] as String?,
       mobile: json['mobile'] as String?,
       address: json['address'] as String?,
-      isActive: json['isActive'] as bool,
+      isActive: json['isActive'] as bool?,
       dateOfBirth: json['dateOfBirth'] as String?,
       clientIDForPartner: json['clientIDForPartner'] as String?,
       gender: json['gender'] as String?,
-      authInfo: json['authInfo'] == null
-          ? null
-          : AuthInfo.fromJson(json['authInfo'] as Map<String, dynamic>),
       hasPin: json['hasPin'] as bool?,
       minimumPasswordAge: json['minimumPasswordAge'] as int?,
       custodianFlag: json['custodianFlag'] as String?,
@@ -27,6 +25,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
     );
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
+      'id': instance.id,
       'username': instance.userName,
       'fullName': instance.fullName,
       'email': instance.email,
@@ -36,7 +35,6 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'gender': instance.gender,
       'dateOfBirth': instance.dateOfBirth,
       'clientIDForPartner': instance.clientIDForPartner,
-      'authInfo': instance.authInfo,
       'hasPin': instance.hasPin,
       'forcePasswordChangeStatus': instance.forcePasswordChangeStatus,
       'minimumPasswordAge': instance.minimumPasswordAge,

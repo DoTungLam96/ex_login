@@ -5,6 +5,7 @@ import 'package:ex_login/cubit/login_state.dart';
 import 'package:ex_login/models/user_model.dart';
 import 'package:ex_module_core/ex_module_core.dart';
 
+import '../repositories/db_repository.dart';
 import '../repositories/login_repositories.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -33,15 +34,13 @@ class LoginCubit extends Cubit<LoginState> {
         password,
       );
 
-      final String? jsonData = await GetIt.instance
-          .get<SharedPreferencesManager>()
-          .getDataIfNotExpired();
-      if (jsonData != null) {
-        final userModel = jsonDecode(jsonData) as Map<String, dynamic>;
+      final userLocal =
+          await GetIt.instance<DatabaseRepository>().getSavedUser();
+      if (userLocal?.userName != null) {
         emit(
           LoginState.loginSuccess(
             response,
-            UserModel.fromJson(userModel),
+            userLocal,
           ),
         );
       } else {
