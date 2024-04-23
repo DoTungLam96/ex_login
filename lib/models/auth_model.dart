@@ -9,14 +9,12 @@ class AuthModel {
       required this.accessToken,
       required this.refreshToken});
 
-        String username;
+  String username;
   String accessToken;
   String refreshToken;
 
-
   factory AuthModel.fromJson(Map<String, dynamic> json) =>
       _$AuthModelFromJson(json);
-
 
   Map<String, dynamic> toJson() => _$AuthModelToJson(this);
 }

@@ -29,25 +29,29 @@ class LoginRepositoriesImpl implements LoginRepositories {
   Future<AuthModel?> login(String username, String password,
       {String? captchaToken, bool? isSaveLogin}) async {
     try {
-      final _request = {'username': username, 'password': password};
+      final request = {'username': username, 'password': password};
 
-      final _response = await loginServices.login(_request);
+      final response = await loginServices.login(request);
 
       await sharedPreferencesManager.putString(
-          KEY_ACCESS_TOKEN, _response.data!.accessToken);
+          KEY_ACCESS_TOKEN, response.data!.accessToken);
 
-      return _response.data;
+      return response.data;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 
   @override
   Future<UserModel?> getMe() async {
     try {
-      final _response = await loginServices.getMe();
-
-      return _response.data;
+      final response = await loginServices.getMe();
+      final isSaved = await sharedPreferencesManager.saveDataWithExpiration(
+        jsonEncode(response.data),
+        const Duration(minutes: 2),
+      );
+      print("saved_me: ${isSaved}");
+      return response.data;
     } catch (e) {
       return null;
     }
